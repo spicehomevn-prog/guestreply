@@ -26,6 +26,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: 'Trợ Lý Trả Lời Khách',
   description: 'Soạn câu trả lời cho khách nhanh, đúng thông tin từng nhà. Hỗ trợ tiếng Việt và tiếng Anh.',
+  icons: {
+    icon: [
+      { url: '/logo/favicon.svg', type: 'image/svg+xml' },
+      { url: '/logo/favicon-64.png', sizes: '64x64', type: 'image/png' },
+    ],
+    apple: { url: '/logo/apple-touch-icon.png' },
+    shortcut: '/logo/favicon-64.png',
+  },
   openGraph: {
     title: 'Trợ Lý Trả Lời Khách',
     description: 'Soạn câu trả lời cho khách nhanh · đúng thông tin · đa ngôn ngữ',

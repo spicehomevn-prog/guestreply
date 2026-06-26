@@ -92,7 +92,10 @@ export default function ChatWorkspace(props: Props) {
         <div className="chathead" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px 24px', borderBottom: '1px solid #E8E4DC', background: '#fff' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
             <div className="menubtn hov" onClick={props.onToggleRail} style={{ cursor: 'pointer', width: 38, height: 38, border: '1px solid #E8E4DC', display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none', fontSize: 17, color: '#2C2C2A', transition: 'all .15s' }}>☰</div>
-            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, color: '#1A1A18' }}>Cuộc trò chuyện</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <img src="/logo/mark.svg" alt="SpiceHome" style={{ width: 26, height: 26 }} />
+              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, color: '#1A1A18' }}>Cuộc trò chuyện</span>
+            </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
             <span className="tonelabel" style={{ fontSize: 12, color: '#7A7A72' }}>Giọng:</span>

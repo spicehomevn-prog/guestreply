@@ -11,7 +11,9 @@ export default function WelcomeScreen({ theme }: { theme: ThemeTokens }) {
         <div className="lfade1" style={{ position: 'relative', width: 88, height: 88, margin: '0 auto 34px' }}>
           <span style={{ position: 'absolute', inset: 0, borderRadius: 999, border: `1px solid ${acTint}`, animation: 'ring 2.8s ease-out infinite' }} />
           <span style={{ position: 'absolute', inset: 0, borderRadius: 999, border: `1px solid ${acTint}`, animation: 'ring 2.8s ease-out 1.4s infinite' }} />
-          <div style={{ position: 'absolute', inset: 0, borderRadius: 999, background: ac, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 34, animation: 'breathe 2.8s ease-in-out infinite' }}>✦</div>
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 999, background: ac, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'breathe 2.8s ease-in-out infinite' }}>
+              <img src="/logo/mark-reverse.svg" alt="SpiceHome" style={{ width: 44, height: 44 }} />
+            </div>
         </div>
 
         {/* Eyebrow */}

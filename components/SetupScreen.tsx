@@ -35,8 +35,11 @@ export default function SetupScreen({ s, theme, onSelectProp, onSelectTone, onSt
 
         {/* Header */}
         <div style={{ background: '#1A1A18', padding: '32px 36px' }}>
-          <div style={{ font: '500 12px Inter, sans-serif', letterSpacing: '.15em', textTransform: 'uppercase', color: ac }}>Trợ lý trả lời khách</div>
-          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 30, color: '#fff', marginTop: 12, lineHeight: 1.15 }}>Bắt đầu cuộc trò chuyện</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+            <img src="/logo/mark-reverse.svg" alt="SpiceHome" style={{ width: 32, height: 32 }} />
+            <span style={{ font: '500 12px Inter, sans-serif', letterSpacing: '.15em', textTransform: 'uppercase', color: ac }}>Trợ lý trả lời khách</span>
+          </div>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 30, color: '#fff', marginTop: 10, lineHeight: 1.15 }}>Bắt đầu cuộc trò chuyện</div>
           <div style={{ color: 'rgba(255,255,255,.6)', fontSize: 14, marginTop: 8, lineHeight: 1.55 }}>Chọn nhà và giọng văn. Trợ lý sẽ tự nhận diện ngôn ngữ của khách và soạn câu trả lời phù hợp.</div>
         </div>
 
