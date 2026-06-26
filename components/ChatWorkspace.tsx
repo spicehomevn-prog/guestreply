@@ -52,7 +52,7 @@ export default function ChatWorkspace(props: Props) {
   const sendBg = s.generating ? '#C9B6A2' : ac;
 
   return (
-    <div style={{ height: '100vh', minHeight: 600, display: 'flex', position: 'relative', fontFamily: 'Inter, sans-serif', background: '#FAFAF8' }}>
+    <div className="fullh" style={{ minHeight: 560, display: 'flex', position: 'relative', fontFamily: 'Inter, sans-serif', background: '#FAFAF8' }}>
       {/* Scrim */}
       <div className={`railscrim${s.railOpen ? ' open' : ''}`} onClick={props.onCloseRail} />
 

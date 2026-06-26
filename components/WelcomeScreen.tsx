@@ -4,7 +4,7 @@ import type { ThemeTokens } from '@/lib/theme';
 export default function WelcomeScreen({ theme }: { theme: ThemeTokens }) {
   const { ac, acTint } = theme;
   return (
-    <div style={{ height: '100vh', minHeight: 600, background: '#1A1A18', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, overflow: 'hidden', fontFamily: 'Inter, sans-serif' }}>
+    <div className="fullh" style={{ minHeight: 560, background: '#1A1A18', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, overflow: 'hidden', fontFamily: 'Inter, sans-serif' }}>
       <div style={{ textAlign: 'center', maxWidth: 400 }}>
 
         {/* Icon with rings */}

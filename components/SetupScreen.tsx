@@ -30,7 +30,7 @@ export default function SetupScreen({ s, theme, onSelectProp, onSelectTone, onSt
   const startBg = s.propId ? ac : '#D8C9BB';
 
   return (
-    <div style={{ height: '100vh', minHeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, overflow: 'auto', fontFamily: 'Inter, sans-serif', background: '#FAFAF8' }}>
+    <div className="fullh" style={{ minHeight: 560, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, overflow: 'auto', fontFamily: 'Inter, sans-serif', background: '#FAFAF8' }}>
       <div className="setupcard" style={{ width: 520, maxWidth: '100%', background: '#fff', border: '1px solid #E8E4DC' }}>
 
         {/* Header */}

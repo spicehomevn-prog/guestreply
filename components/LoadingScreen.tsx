@@ -10,7 +10,7 @@ interface Props {
 export default function LoadingScreen({ theme, curProp }: Props) {
   const { ac, acTint } = theme;
   return (
-    <div style={{ height: '100vh', minHeight: 600, background: '#1A1A18', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, overflow: 'hidden', fontFamily: 'Inter, sans-serif' }}>
+    <div className="fullh" style={{ minHeight: 560, background: '#1A1A18', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, overflow: 'hidden', fontFamily: 'Inter, sans-serif' }}>
       <div style={{ textAlign: 'center', maxWidth: 360 }}>
 
         {/* Monogram with rings */}
