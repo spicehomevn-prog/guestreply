@@ -112,7 +112,7 @@ export default function SetupScreen({ s, theme, onSelectProp, onSelectTone, onSt
                   <div onClick={onAddProperty} className="hovd" style={{ cursor: 'pointer', background: ac, color: '#fff', padding: '10px 18px', font: '500 11.5px Inter, sans-serif', letterSpacing: '.08em', textTransform: 'uppercase', transition: 'background .2s' }}>Thêm nhà</div>
                   <div onClick={onCancelAdd} className="hov" style={{ cursor: 'pointer', border: '1px solid #E8E4DC', padding: '10px 18px', font: '500 11.5px Inter, sans-serif', color: '#2C2C2A', transition: 'all .15s' }}>Hủy</div>
                 </div>
-                <div style={{ fontSize: 11.5, color: '#9C9384', lineHeight: 1.5, marginTop: 2 }}>Cứ thêm trước, mỗi phần trong ngoặc có thể sửa lại bất cứ lúc nào ở "Thông tin nhà".</div>
+                <div style={{ fontSize: 11.5, color: '#9C9384', lineHeight: 1.5, marginTop: 2 }}>Cứ thêm trước, mỗi phần trong ngoặc có thể sửa lại bất cứ lúc nào ở &quot;Thông tin nhà&quot;.</div>
               </div>
             )}
           </div>

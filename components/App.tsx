@@ -4,12 +4,9 @@ import type { AppState, Property, Message, SavedReply, Tone } from '@/lib/types'
 import { loadAll, persistProperties, persistPropId, persistTone, persistSaved } from '@/lib/storage';
 import { deriveTheme } from '@/lib/theme';
 import WelcomeScreen from './WelcomeScreen';
-import PinScreen from './PinScreen';
 import SetupScreen from './SetupScreen';
 import LoadingScreen from './LoadingScreen';
 import ChatWorkspace from './ChatWorkspace';
-
-const REQUIRED_PIN = process.env.NEXT_PUBLIC_ACCESS_PIN || '';
 
 const NEW_TEMPLATE = `Khu vực: (gần chợ, quán ăn, điểm tham quan…)
 Nhận phòng: (vd: từ 14:00) – Trả phòng: (vd: trước 12:00)
@@ -28,7 +25,7 @@ function makeMono(name: string): string {
 }
 
 const INITIAL: AppState = {
-  screen: REQUIRED_PIN ? 'pin' : 'welcome',
+  screen: 'welcome',
   propId: null,
   tone: 'friendly',
   properties: [],
@@ -56,47 +53,25 @@ export default function App() {
   const copyRef  = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const startWelcomeTimer = () => {
-    if (introRef.current) clearTimeout(introRef.current);
+  // Load from localStorage on mount + start welcome timer
+  useEffect(() => {
+    const stored = loadAll();
+    setS(prev => ({ ...prev, ...stored }));
     introRef.current = setTimeout(() => {
       setS(prev => prev.screen === 'welcome' ? { ...prev, screen: 'setup' } : prev);
     }, 2400);
-  };
-
-  // Load from localStorage on mount + start welcome timer (or show PIN gate)
-  useEffect(() => {
-    const stored = loadAll();
-    if (REQUIRED_PIN) {
-      const sessionPin = sessionStorage.getItem('sh_pin') || '';
-      if (sessionPin === REQUIRED_PIN) {
-        setS(prev => ({ ...prev, ...stored, screen: 'welcome' }));
-        startWelcomeTimer();
-      } else {
-        setS(prev => ({ ...prev, ...stored, screen: 'pin' }));
-      }
-    } else {
-      setS(prev => ({ ...prev, ...stored }));
-      startWelcomeTimer();
-    }
     return () => {
       if (introRef.current) clearTimeout(introRef.current);
       if (typerRef.current) clearTimeout(typerRef.current);
       if (startRef.current) clearTimeout(startRef.current);
       if (copyRef.current) clearTimeout(copyRef.current);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Auto-scroll message list on new messages
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [s.messages]);
-
-  const validatePin = (pin: string) => {
-    sessionStorage.setItem('sh_pin', pin);
-    setS(prev => ({ ...prev, screen: 'welcome' }));
-    startWelcomeTimer();
-  };
 
   const theme = deriveTheme('#C4773B', 'Vừa phải', 'Bo tròn');
 
@@ -149,10 +124,9 @@ export default function App() {
       // Async call — fire and handle
       (async () => {
         try {
-          const pin = sessionStorage.getItem('sh_pin') || '';
           const res = await fetch('/api/reply', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', ...(pin ? { 'x-pin': pin } : {}) },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ property: prop, tone: prev.tone, guestMessage: guestText }),
           });
           const data = await res.json() as { reply?: string; guest_vi?: string; reply_vi?: string };
@@ -334,7 +308,6 @@ export default function App() {
 
   const commonProps = { s, theme, curProp };
 
-  if (s.screen === 'pin') return <PinScreen theme={theme} onSuccess={validatePin} />;
   if (s.screen === 'welcome') return <WelcomeScreen theme={theme} />;
   if (s.screen === 'loading') return <LoadingScreen theme={theme} curProp={curProp} />;
   if (s.screen === 'setup') return (

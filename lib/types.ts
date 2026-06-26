@@ -24,7 +24,7 @@ export interface SavedReply {
   text: string;
 }
 
-export type Screen = 'pin' | 'welcome' | 'setup' | 'loading' | 'chat';
+export type Screen = 'welcome' | 'setup' | 'loading' | 'chat';
 export type Tone = 'friendly' | 'professional' | 'concise';
 
 export interface ReplyResponse {

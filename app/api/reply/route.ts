@@ -6,11 +6,6 @@ import type { Property, Tone } from '@/lib/types';
 const client = new Anthropic();
 
 export async function POST(request: Request) {
-  const requiredPin = process.env.ACCESS_PIN || '';
-  if (requiredPin && request.headers.get('x-pin') !== requiredPin) {
-    return Response.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
   try {
     const body = await request.json() as {
       property: Property;
