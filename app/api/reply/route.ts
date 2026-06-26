@@ -3,10 +3,13 @@ import { buildPrompt } from '@/lib/prompt';
 import { parseReply } from '@/lib/parseReply';
 import type { Property, Tone } from '@/lib/types';
 
-const client = new Anthropic();
-
 export async function POST(request: Request) {
   try {
+    if (!process.env.ANTHROPIC_API_KEY) {
+      console.error('ANTHROPIC_API_KEY is not set');
+      return Response.json({ error: 'API key not configured' }, { status: 500 });
+    }
+
     const body = await request.json() as {
       property: Property;
       tone: Tone;
@@ -19,10 +22,11 @@ export async function POST(request: Request) {
       return Response.json({ error: 'Missing property or guestMessage' }, { status: 400 });
     }
 
+    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const prompt = buildPrompt(property, property.context || '', tone, guestMessage);
 
     const resp = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+      model: 'claude-3-5-haiku-20241022',
       max_tokens: 1024,
       messages: [{ role: 'user', content: prompt }],
     });
@@ -32,7 +36,8 @@ export async function POST(request: Request) {
 
     return Response.json(data);
   } catch (err) {
-    console.error('Reply API error:', err);
-    return Response.json({ error: 'Internal server error' }, { status: 500 });
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('Reply API error:', message);
+    return Response.json({ error: message }, { status: 500 });
   }
 }

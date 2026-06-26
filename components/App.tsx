@@ -129,8 +129,8 @@ export default function App() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ property: prop, tone: prev.tone, guestMessage: guestText }),
           });
-          if (!res.ok) throw new Error(`API ${res.status}`);
-          const data = await res.json() as { reply?: string; guest_vi?: string; reply_vi?: string };
+          const data = await res.json() as { reply?: string; guest_vi?: string; reply_vi?: string; error?: string };
+          if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
           const guestVi = (data.guest_vi || '').trim();
           const replyVi = (data.reply_vi || '').trim();
           const replyText = (data.reply || '').trim() || 'Mình chưa nhận được nội dung. Bạn thử bấm "Tạo lại" nhé.';
@@ -143,13 +143,17 @@ export default function App() {
             }),
           }));
           typeOut(hid, replyText);
-        } catch {
+        } catch (err) {
+          const detail = err instanceof Error ? err.message : '';
+          const msg = detail
+            ? `Lỗi: ${detail}`
+            : 'Xin lỗi, hiện mình chưa tạo được câu trả lời. Bạn thử bấm "Tạo lại" sau giây lát nhé.';
           setS(p => ({
             ...p,
             generating: false,
             messages: p.messages.map(m =>
               m.id === hid
-                ? { ...m, typing: false, displayText: 'x', text: 'Xin lỗi, hiện mình chưa tạo được câu trả lời (có thể do giới hạn lượt). Bạn thử bấm "Tạo lại" sau giây lát nhé.' }
+                ? { ...m, typing: false, displayText: msg, text: msg }
                 : m
             ),
           }));
