@@ -14,9 +14,25 @@ const inter = Inter({
   display: 'swap',
 });
 
+const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : 'http://localhost:3000';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: 'Trợ Lý Trả Lời Khách',
-  description: 'Người trợ lý đắc lực giúp bạn trả lời khách nhanh và đúng thông tin từng nhà.',
+  description: 'Soạn câu trả lời cho khách nhanh, đúng thông tin từng nhà. Hỗ trợ tiếng Việt và tiếng Anh.',
+  openGraph: {
+    title: 'Trợ Lý Trả Lời Khách',
+    description: 'Soạn câu trả lời cho khách nhanh · đúng thông tin · đa ngôn ngữ',
+    type: 'website',
+    locale: 'vi_VN',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Trợ Lý Trả Lời Khách',
+    description: 'Soạn câu trả lời cho khách nhanh · đúng thông tin · đa ngôn ngữ',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
