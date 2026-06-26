@@ -129,6 +129,7 @@ export default function App() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ property: prop, tone: prev.tone, guestMessage: guestText }),
           });
+          if (!res.ok) throw new Error(`API ${res.status}`);
           const data = await res.json() as { reply?: string; guest_vi?: string; reply_vi?: string };
           const guestVi = (data.guest_vi || '').trim();
           const replyVi = (data.reply_vi || '').trim();
