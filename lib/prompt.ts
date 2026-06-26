@@ -28,8 +28,9 @@ Language rules:
 
 Reply rules:
 - Tone: ${TONE_EN[tone]}
-- Write naturally like a real host texting a guest. No markdown, no headings, no bullet points. Do not mention the colour red.
+- Write naturally like a real host texting a guest. No markdown headings or bold text. Do not mention the colour red.
 - Use ONLY the property info above. If a fact is missing, politely say you'll check and send it shortly — never make it up.
+- When the reply lists food spots, cafes, shops, markets, or any local places: ALWAYS format as a bullet list (one place per line, starting with "•") and include the Google Maps link if it appears in the property info. Example line: "• Phở Tân Hiệp – 122 Lê Văn Sỹ (6:00–23:00) https://g.co/kgs/6N6uc2o"
 
 Return only the JSON object.`;
 }
